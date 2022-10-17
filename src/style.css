@@ -1,0 +1,159 @@
+@media only screen and (max-device-width: 1960px) {
+    .page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font: 16px 'Roboto', 'sans-serif';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: #232323;
+    background-image: url(pattern-30.svg);
+    background-repeat: repeat;
+    background-position: center;
+    min-height: 100%;
+    background-attachment: initial;
+  }
+
+  .telegram_button {
+    width: 50%;
+    position: fixed;
+    top: 20px;
+    background-color: #232323;
+  }
+
+  .container {
+   width: 500px;
+   margin-top: 80px;
+  }
+
+  .message_container {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  float: left;
+  vertical-align: top;
+  color: #232323;
+  background-color: #ffffff;
+  margin-top: 5px;
+  }
+
+  .message_title {
+    padding: 10px 0px 10px 20px;
+    font-weight: bold;
+  }
+  
+  .img_width {
+    width: 500px;
+  }
+
+  .message {
+    padding: 10px 20px 0px 20px;
+  }
+
+  .message pre {
+    font: 16px 'Roboto', 'sans-serif';
+    color: #232323;
+    white-space: pre-line;
+  }
+
+  .message_url {
+    padding: 10px 20px 10px 20px;
+    word-break: break-all;
+  }
+  
+  .message_bottom {
+    font-size: 14px; 
+    padding: 0px 20px 10px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  
+  .bottom_block {
+    width: 50%;
+  }
+  
+  .message_date {
+    color: #738ca7;
+    text-align: right;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  
+     .page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font: 16px 'Roboto', 'sans-serif';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-color: #232323;
+    background-image: url(pattern-30.svg);
+    background-repeat: repeat;
+    background-position: center;
+    min-height: 100%;
+    background-attachment: initial;
+  }
+  
+    .telegram_button {
+    width: 95%;
+    position: fixed;
+    top: 5px;
+    background-color: #232323;
+  }
+  
+  .container {
+   width: 90%;
+   margin-top: 50px;
+  }
+
+  .message_container {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  float: left;
+  vertical-align: top;
+  color: #232323;
+  background-color: #ffffff;
+  margin-top: 5px;
+  }
+
+  .message_title {
+    padding: 10px 0px 10px 20px;
+    font-weight: bold;
+  }
+
+  .message {
+    padding: 10px 20px 10px 20px;
+  }
+
+  .message pre {
+    font: 16px 'Roboto', 'sans-serif';
+    color: #232323;
+    white-space: pre-line;
+  }
+
+  .message_url {
+    padding: 10px 20px 10px 20px;
+    word-wrap: break-word;
+  }
+}
+
+a:link, a:active, a:visited {
+  text-decoration: none;
+  color: #2481cc;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #2481cc;
+}
+
