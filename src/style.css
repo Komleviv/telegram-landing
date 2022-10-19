@@ -60,6 +60,7 @@
   .container {
    width: 500px;
    margin-top: 5px;
+   margin-bottom: 57px;
   }
 
   .message_container {
@@ -111,10 +112,19 @@
   .bottom_block_right {
     width: 50%;
     text-align: right;
+    color: #738ca7;
   }
   
-  .message_date {
-    color: #738ca7;
+  .message_view {
+    display: inline-block;
+  }
+  
+  .view_icon {
+    display: inline-block;
+    width: 18px;
+    margin: 0px 10px 0px 5px;
+    fill: #738ca7;
+    vertical-align: middle;
   }
 }
 
