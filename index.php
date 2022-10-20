@@ -3,7 +3,7 @@ include 'libs/madeline/madeline_scripts.php';
 
 $source = '';
    
-$messages = get_messages('btca_ru', 190, 10);
+$messages = get_messages('btca_ru', 190, 11);
 
 foreach(array_reverse($messages) as $i => $message) { 
  $media = get_images($message);
@@ -14,7 +14,7 @@ foreach(array_reverse($messages) as $i => $message) {
  if (!empty($message['media']['photo'])) {
  
  // Ищем по id картинки jpg файл в каталоге /img
-     $photo_id = glob('img/' . $message['media']['photo']['id']  . '*.jpg');
+     $photo_id = glob('img/' . $message['media']['photo']['id']  . '*.webp');
      if (!empty($photo_id)) {
         $source .= "<div class='message_img'><a href='https://t.me/btca_ru/" . $message['id'] ."' target='_blank'><img src='" . $photo_id[0] ."' class='img_width'></a></div>";
      }
@@ -23,6 +23,12 @@ foreach(array_reverse($messages) as $i => $message) {
  // Если в сообщение есть видео добавляем его к выводу
  if (!empty($message['media']['document'])) {
      $source .= "";
+ }
+ if (!empty($message['entities'])) {
+    foreach ($message['entities'] as $j => $decorate) {
+     $message_string = $message['message'];
+     //echo $message_decorate = substr($message_string, $message['entities'][$j]['offset'],  $message['entities'][$j]['length']*2) . '<br>';
+    }
  }
  $source .= "<div class='message'><pre>" . $message['message']. "</pre></div>";
  if (isset($message['entities'][0]['url'])) {

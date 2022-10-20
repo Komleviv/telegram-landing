@@ -13,7 +13,7 @@ function connect() {
           'api_hash' => '1665e36b7cd6313a4468876f7bf875c3',
       ],
       'logger' => [ // Вывод сообщений и ошибок
-          'logger' => 3, // выводим сообещения через echo
+          'logger' => 1, // не выводим ошибки (?)
           'logger_level' => 4, // выводим только критические ошибки.
       ],
     'serialization' => [
@@ -38,10 +38,9 @@ function get_messages($peer, $min_id, $limit) {
       'offset_id' => 0, 
       'offset_date' => 0, 
       'add_offset' => 0, 
-      'limit' => 10, 
+      'limit' => $limit, 
       'max_id' => 0, 
-      'min_id' => $min_id, 
-      'hash' => $limit, 
+      'min_id' => $min_id,
   ]);
 
   $messages = $messages_Messages['messages'];
@@ -54,8 +53,62 @@ function get_images($message) {
   $MadelineProto = connect();
   // Если информация о сообщение содержит медиа-файл, сохраняем его в выбранную категорию
   if (!empty($message['media'])) {
-     yield $MadelineProto->downloadToDir($message, getcwd() . '/img/');
+  
+    // Если медиа - это изображение
+    if (!empty($message['media']['photo'])) {
+      
+        // Проверяем существования файла с таким id.
+        $glob = glob('img/' . $message['media']['photo']['id']  . '*.*');
+        if  (empty($glob[0])) {
+          // Если файла нет, скачиваем его
+          $MadelineProto->downloadToDir($message, getcwd() . '/img/');
+          
+          // Преобразовываем скаченный файл в .webl и удаляем исходник
+          $glob_jpg = glob('img/' . $message['media']['photo']['id']  . '*.jpg');
+          if (!empty($glob_jpg[0])) {
+            webpImage($glob_jpg[0]);
+          }
+        }
+    } elseif (!empty($message['media']['document'])) {
+      
+      // Проверяем существования файла с таким id.
+      $glob = glob('img/' . $message['media']['document']['id']  . '*.*');
+      if  (empty($glob[0])) {
+
+          // Если файла нет, скачиваем его
+          $MadelineProto->downloadToDir($message, getcwd() . '/img/');
+        }
+    }
   }
 }
+
+function webpImage($source, $quality = 50, $removeOld = true)
+    {
+        $dir = pathinfo($source, PATHINFO_DIRNAME);
+        $name = pathinfo($source, PATHINFO_FILENAME);
+        $destination = $dir . DIRECTORY_SEPARATOR . $name . '.webp';
+        $info = getimagesize($source);
+        $isAlpha = false;
+        if ($info['mime'] == 'image/jpeg')
+            $image = imagecreatefromjpeg($source);
+        elseif ($isAlpha = $info['mime'] == 'image/gif') {
+            $image = imagecreatefromgif($source);
+        } elseif ($isAlpha = $info['mime'] == 'image/png') {
+            $image = imagecreatefrompng($source);
+        } else {
+            return $source;
+        }
+        if ($isAlpha) {
+            imagepalettetotruecolor($image);
+            imagealphablending($image, true);
+            imagesavealpha($image, true);
+        }
+        imagewebp($image, $destination, $quality);
+
+        if ($removeOld)
+            unlink($source);
+
+        return $destination;
+    }
 
 ?>
