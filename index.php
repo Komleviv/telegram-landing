@@ -7,14 +7,18 @@ $messages = get_messages('btca_ru', 190, 10);
 
 foreach(array_reverse($messages) as $i => $message) { 
  $media = get_images($message);
- //print_r (glob('5353030282212654688'));
  $source .= "<div class='message_container'>";
  $source .= "<div class='message_title'><a href='https://t.me/btca_ru' target='_blank'>BITCOIN ADDITIONAL (RU)</a></div>";
  
  // Если в сообщение есть изображение добавляем его к выводу
  if (!empty($message['media']['photo'])) {
-     $source .= "<div class='message_img'><a href='https://t.me/btca_ru/" . $message['id'] ."' target='_blank'><img src='/img/" . $message['media']['photo']['id'] ."_y_2.jpg' class='img_width'></a></div>";
- }
+ 
+ // Ищем по id картинки jpg файл в каталоге /img
+     $photo_id = glob('img/' . $message['media']['photo']['id']  . '*.jpg');
+     if (!empty($photo_id)) {
+        $source .= "<div class='message_img'><a href='https://t.me/btca_ru/" . $message['id'] ."' target='_blank'><img src='" . $photo_id[0] ."' class='img_width'></a></div>";
+     }
+}
   
  // Если в сообщение есть видео добавляем его к выводу
  if (!empty($message['media']['document'])) {
